@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>sinbor</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<style type="text/css">
+		body {
+			background: #f953c6;  /* fallback for old browsers */
+			background: -webkit-linear-gradient(to right, #b91d73, #f953c6);  /* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to right, #b91d73, #f953c6); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+
+			/*overflow: hidden;*/
+		}
+
+		h1 {
+			text-align: center;
+			font-size: 10em;
+			color: white;
+			opacity: 0.5;
+			margin-top: 120px;
+		}
+		div {
+		  width: 425px;
+		  height: 270px;
+		  padding: 20px;		  
+		  background: url(sinbor.png);
+		  background-size: cover;
+		  position: absolute;
+		  left: 0;
+		  right: 0;
+		  bottom: 0;
+		  top: 0;
+		}
+
+		div:hover, div:active, div:focus {
+			cursor: pointer;
+			background: url(sinbor-hover.png);
+			background-size: cover;
+		}
+
+		@media only screen and (max-device-width: 667px) {
+			h1 {
+				font-size: 5.3em;
+				margin-top: 200px
+			}
+			div {
+				width: 200px;
+				height: 120px;
+			}
+		}
+	</style>
+</head>
+<body>
+	<h1>sinbor</h1>
+	<div></div>
+</body>
+<script type="text/javascript">
+	let elem = document.querySelector('div');
+	let rect = elem.getBoundingClientRect();
+	var w = window.innerWidth;
+	var h = window.innerHeight;
+	elem.style.left = (w/2 - rect.width/2) + 'px';
+	elem.style.top = (h/2 - rect.height/2) + 'px';
+
+	function randGen(num) {
+		let valueSign = Math.random() < .5 ? -1 : 1;
+		return Math.random() * num * valueSign;
+	}
+
+	function isValid(min, max, number) {
+		if (number < min ) {
+			return false;
+		} else if (number > max) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	function moveElem() {
+		var w = window.innerWidth;
+		var h = window.innerHeight;
+		let rect = elem.getBoundingClientRect();
+		if (rect.right > w || rect.bottom > h) {
+	  		elem.style.left = '0px';
+	  	}	    
+		
+	  	let leftPos = elem.style.left.substring(0, elem.style.left.length - 2);
+	  	let topPos = elem.style.top.substring(0, elem.style.top.length - 2);
+	  	if (!leftPos) {
+	  		elem.style.left = rect.width + "px";
+	  		elem.style.top = rect.height + "px";
+	  	} else {
+	  		var newLeft = parseInt(leftPos) + randGen(rect.width + rect.width);
+	  		while (!isValid(0, w-rect.width, newLeft)) {
+	  			newLeft = parseInt(leftPos) + randGen(rect.width + rect.width);
+	  		}
+	  		// newLeft = Math.max(0, newLeft);
+	  		// newLeft = Math.min(w-rect.width, newLeft);
+
+	  		var newTop = parseInt(topPos) + randGen(rect.height/10 + rect.height);
+	  		while (!isValid(0, h-rect.height, newTop)) {
+	  			newTop = parseInt(topPos) + randGen(rect.height/10 + rect.height);
+	  		}
+
+	  		// newTop = Math.max(0, newTop);
+	  		// newTop = Math.min(h-rect.height, newTop)
+	  		elem.style.left = newLeft + 'px';
+	  		elem.style.top = newTop + 'px';
+	  	}
+	}
+
+	elem.addEventListener("mouseover", moveElem);
+	elem.addEventListener("click", moveElem);	
+</script>
+</html>

@@ -21,7 +21,7 @@
 			width: 100%;
 		    height: 100%;
 		    position: absolute;
-		    background: url(sinbor-cover.jpg) 0px -220px;
+		    background: url(./assets/images/sinbor-cover.jpg) 0px -220px;
 		    top: 0;
 		    left: 0;
 		    background-size: cover;
@@ -48,7 +48,7 @@
 		  width: 425px;
 		  height: 270px;
 		  padding: 20px;		  
-		  background: url(sinbor.jpg);
+		  background: url(./assets/images/sinbor.jpg);
 		  background-size: cover;
 		  position: absolute;
 		  left: 0;
@@ -59,13 +59,13 @@
 
 		#video:hover, #video:active, #video:focus {
 			cursor: pointer;
-			background: url(sinbor-hover.jpg);
+			background: url(./assets/images/sinbor-hover.jpg);
 			background-size: cover;
 		}
 
 		@media only screen and (max-device-width: 667px) {
 			#cover {
-				background:url(sinbor-cover.jpg) 0px 40px;
+				background:url('./assets/images/sinbor-cover.jpg') 0px 40px;
 			}
 			h1 {
 				font-size: 5.3em;
@@ -91,7 +91,7 @@
 	<div id="video"></div>
 </body>
 <script type="text/javascript">
-	console.log("S,C i D")
+	console.log("Fali mi S,C i D")
 	const sinborUrl = 'https://youtu.be/JxKDta-IwX4';
 	let elem = document.getElementById('video');
 	let rect = elem.getBoundingClientRect();
@@ -154,7 +154,7 @@
 	elem.addEventListener("click", function URL() {
     	setTimeout(function(){ 
     		linkActive = true; 
-    	}, 10000);
+    	}, 6500);
 
     	if(linkActive === true){
     		window.open(sinborUrl, '_blank');
